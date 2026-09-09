@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Admin Functionality" parallel="classes" thread-count="2">
+
+    <parameter name="browser" value="chrome"/>
+
+    <test name="User check Login Module">
+        <classes>
+            <class name="TestRunner.Test_runner"/>
+            <class name="AppUtils.TestNGParameter"/>
+               <class name="TestRunner.AdminRunner"/>
+        </classes>
+    </test>
+
+    <test name="Leave Module">
+        <classes>
+            <class name="TestRunner.Leave"/>
+        </classes>
+    </test>
+
+</suite>

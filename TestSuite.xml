@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+
+<suite name="Admin Functionlity" parallel="classes" thread-count="2">
+
+	<test name="User check Admin Module is showing">
+
+		<classes>
+
+
+			<class name="TestRunner.AdminRunner"></class>
+		<class name="TestRunner.Test_runner"></class>
+
+		</classes>
+
+	</test>
+	
+	
+	<test name= "leave Module" > 
+	
+	<classes>
+	      <class name ="TestRunner.Leave"> </class>
+	 </classes>
+	
+	</test>
+
+</suite>
