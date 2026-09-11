@@ -1,5 +1,5 @@
 Feature: User validate Login functionality with valid credentails
-
+@smoke
 Scenario Outline: user login application with valid credentials
 
 And user enters username as "<username>"
@@ -10,7 +10,7 @@ Examples:
 |username|Pwd|
 |Admin|Qedge123!@#|
 
-@sanity
+@Sanity
 
 Scenario Outline: user login application with invalid credentials
 

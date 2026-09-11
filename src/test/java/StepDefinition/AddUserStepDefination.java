@@ -9,13 +9,13 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
 public class AddUserStepDefination {
-	WebDriver driver;
+	WebDriver threaddriver;
 
 	AddUser ad;
 
 	@Given("user click on Add")
 	public void user_click_on_add() {
-		driver = Hooks.driver;
+		threaddriver = Hooks.getThreaddriver().get();
 		ad = new AddUser(driver);
 		ad.userclickAddButton();
 

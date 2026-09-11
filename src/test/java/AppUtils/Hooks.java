@@ -23,23 +23,25 @@ import io.cucumber.java.Scenario;
 
 public class Hooks {
 
-	
-    public static WebDriver driver;
+	private static ThreadLocal<WebDriver> threaddriver= new ThreadLocal<>();
+
 	Readconfig config = new Readconfig();
 	Login_page lp;
 
+	WebDriver webdriver;
+	
 	@Before
 	public void Launchapp() {
 
+  webdriver= new ChromeDriver();
+ threaddriver.set(webdriver);
+;
+     threaddriver.get().manage().deleteAllCookies();
+     threaddriver.get().manage().window().maximize();
+     threaddriver.get().get(config.getUrl());
 
 
-     driver= new ChromeDriver();
-     driver.manage().deleteAllCookies();
-     driver.manage().window().maximize();
-     driver.get(config.getUrl());
-
-
-		lp = new Login_page(driver);
+		lp = new Login_page(threaddriver.get());
 
 		lp.UserEnterUsernamehooks();
 		lp.UserEnterpasswordhooks();
@@ -69,7 +71,7 @@ public class Hooks {
 
 			try {
 
-				TakesScreenshot ts = (TakesScreenshot) driver;
+				TakesScreenshot ts = (TakesScreenshot) threaddriver.get();
 
 				File src = ts.getScreenshotAs(OutputType.FILE);
 
@@ -77,7 +79,7 @@ public class Hooks {
 								+ fileName + "_" + uniqueString + ".png");
 
 				FileUtils.copyFile(src, destfile);
-
+System.out.println("");
 			} catch (Exception e) {
 
 				e.printStackTrace();
@@ -88,9 +90,10 @@ public class Hooks {
 	@After
 	public void Logout() {
 
-		if (driver != null) {
+		if (threaddriver.get() != null) {
 
-			driver.quit();
+			threaddriver.get().quit();
+			threaddriver.remove();
 		}
 	}
 }
